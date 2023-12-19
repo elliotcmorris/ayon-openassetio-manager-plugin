@@ -54,10 +54,14 @@ class AyonOpenAssetIOManagerInterface(ManagerInterface):
         hostname = platform.node()
         system_platform = platform.system()
 
+        print(f"{self.__settings[ayon.SERVER_URL_KEY]}/api/system/sites?")
+        print(f"hostname={hostname}&platform={system_platform.lower()}")
+
         response = self.__session.get((
             f"{self.__settings[ayon.SERVER_URL_KEY]}/api/system/sites?"
             f"hostname={hostname}&platform={system_platform.lower()}")
         )
+        print(response.json())
         return response.json()[0]["id"]
 
     def identifier(self):
